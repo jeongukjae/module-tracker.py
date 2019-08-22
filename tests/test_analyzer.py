@@ -10,6 +10,8 @@ from module_tracker.analyzer import parse_file
         pytest.param("from ast import AST", ["ast"]),
         pytest.param("import ast as a", ["ast"]),
         pytest.param("import ast, time, os", ["ast", "time", "os"]),
+        pytest.param("from .some.relative import kk", []),
+        pytest.param("from ...some.relative import kk", []),
     ],
 )
 def test_analyze(file_content, result):

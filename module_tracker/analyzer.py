@@ -22,5 +22,7 @@ def _get_imported_module(node: ast.AST):
     import_statement = cast(ImportType, node)
     if isinstance(import_statement, ast.Import):
         return [alias.name for alias in import_statement.names]
-    elif isinstance(import_statement, ast.ImportFrom):
+    elif isinstance(import_statement, ast.ImportFrom) and import_statement.level == 0:
         return [import_statement.module]
+
+    return []
