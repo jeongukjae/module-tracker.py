@@ -10,7 +10,7 @@ def parse_file(file_content: str) -> List[str]:
         import_name
         for node in ast.walk(parsed_file)
         if _is_import_statement(node)
-        for import_name in _get_imported_module(node)
+        for import_name in _get_imported_modules(node)
     ]
 
 
@@ -18,11 +18,20 @@ def _is_import_statement(node: ast.AST) -> bool:
     return isinstance(node, (ast.Import, ast.ImportFrom))
 
 
-def _get_imported_module(node: ast.AST):
+def _get_imported_modules(node: ast.AST):
     import_statement = cast(ImportType, node)
+
     if isinstance(import_statement, ast.Import):
-        return [alias.name for alias in import_statement.names]
-    elif isinstance(import_statement, ast.ImportFrom) and import_statement.level == 0:
-        return [import_statement.module]
+        return _get_modules_from_import_statement(import_statement)
+    elif isinstance(import_statement, ast.ImportFrom):
+        return _get_modules_from_import_from_statement(import_statement)
 
     return []
+
+
+def _get_modules_from_import_statement(import_statement):
+    return [alias.name for alias in import_statement.names]
+
+
+def _get_modules_from_import_from_statement(import_from_statement):
+    return [import_from_statement.module] if import_from_statement.level == 0 else []
