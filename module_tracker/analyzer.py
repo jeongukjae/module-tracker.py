@@ -4,7 +4,12 @@ from typing import List, Type, Union, cast
 ImportType = Type[Union[ast.Import, ast.ImportFrom]]
 
 
-def parse_file(file_content: str) -> List[str]:
+def parse_file(file_name: str) -> List[str]:
+    with open(file_name) as f:
+        return parse_file_content(f.read())
+
+
+def parse_file_content(file_content: str) -> List[str]:
     parsed_file = ast.parse(file_content)
     return [
         import_name

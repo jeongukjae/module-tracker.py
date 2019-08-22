@@ -1,6 +1,6 @@
 import pytest
 
-from module_tracker.analyzer import parse_file
+from module_tracker.analyzer import parse_file_content
 
 
 @pytest.mark.parametrize(
@@ -14,5 +14,5 @@ from module_tracker.analyzer import parse_file
         pytest.param("from ...some.relative import kk", []),
     ],
 )
-def test_analyze(file_content, result):
-    assert parse_file(file_content) == result
+def test_analyze_import_statement(file_content, result):
+    assert parse_file_content(file_content) == result
