@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="module-tracker",
-    version="0.0.1",
+    version="0.0.2",
     description="a tool that tracks dependencies in project",
     install_requires=[],
     url="https://github.com/jeongukjae/module-tracker.py",
