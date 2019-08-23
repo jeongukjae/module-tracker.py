@@ -35,8 +35,12 @@ def _get_imported_modules(node: ast.AST):
 
 
 def _get_modules_from_import_statement(import_statement):
-    return [alias.name for alias in import_statement.names]
+    return [_normalized_name(alias.name) for alias in import_statement.names]
 
 
 def _get_modules_from_import_from_statement(import_from_statement):
-    return [import_from_statement.module] if import_from_statement.level == 0 else []
+    return [_normalized_name(import_from_statement.module)] if import_from_statement.level == 0 else []
+
+
+def _normalized_name(import_name: str) -> str:
+    return import_name.split(".")[0]
