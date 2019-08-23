@@ -1,3 +1,6 @@
+"""
+isort:skip_file
+"""
 import ast
 import glob
 
@@ -6,5 +9,6 @@ import flask_cors
 import tensorflow
 import torch
 from flask import request
-from test_data import test
 from torch import nn
+
+from test_data import test
