@@ -9,6 +9,7 @@ setup(
     author="Jeong Ukjae",
     author_email="jeongukjae@gmail.com",
     license="MIT",
+    scripts=["scripts/module-tracker"],
     classifiers=[
         "Development Status :: 1 - Planning",
         "License :: OSI Approved :: MIT License",
